@@ -6,7 +6,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch('/api/tweets?username=jack');
+      const res = await fetch('/api/post?username=jack');
       const json = await res.json();
       setUser(json);
     };
