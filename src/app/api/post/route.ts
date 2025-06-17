@@ -1,4 +1,4 @@
-// app/api/tweets/route.ts
+// ユーザー情報を取得するAPIルート
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
