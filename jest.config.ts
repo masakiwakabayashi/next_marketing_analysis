@@ -10,6 +10,9 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // エイリアス対応（必要に応じて）
   },
+  testMatch: [
+    '<rootDir>/src/tests/**/*.(test|spec).{js,jsx,ts,tsx}',
+  ],
 }
 
 export default createJestConfig(customJestConfig)

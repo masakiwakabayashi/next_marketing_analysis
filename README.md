@@ -9,7 +9,9 @@ yarn dev
 yarn test
 ```
 
-
+```bash
+yarn playwright test
+```
 
 
 
