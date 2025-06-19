@@ -24,7 +24,7 @@ const DraftPage = () => {
   const handlePost = () => {
     if (text.length === 0 || remaining < 0) return;
     const newDraft: Draft = {
-      id: drafts.length > 0 ? drafts[0].id + 1 : 1,
+      id: drafts.length + 1,
       text,
       createdAt: new Date().toLocaleString("ja-JP", { hour12: false }),
     };
@@ -65,7 +65,7 @@ const DraftPage = () => {
           <ul className="space-y-4">
             {drafts.map((draft) => (
               <li key={draft.id} className="bg-white rounded-lg shadow p-4 cursor-pointer hover:bg-fuchsia-50 transition">
-                <Link href={`/draft/detail/${draft.id}`} className="block w-full h-full">
+                <Link href={`/x/draft/detail/${draft.id}`} className="block w-full h-full">
                   <div className="text-gray-800">{draft.text}</div>
                   <div className="text-xs text-gray-400 mt-2 text-right">{draft.createdAt}</div>
                 </Link>
