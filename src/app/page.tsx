@@ -5,7 +5,7 @@ export default function Home() {
   const links = [
     { href: "/x/analysis", label: "Analysis" },
     { href: "/x/draft", label: "Draft" },
-    { href: "/x/draft/detail/sample-id", label: "Draft Detail (サンプルID)" },
+    { href: "/x/draft/detail/sample-id", label: "Draft Detail" },
     { href: "/x/kpi", label: "KPI" },
     { href: "/x/template", label: "Template" },
   ];

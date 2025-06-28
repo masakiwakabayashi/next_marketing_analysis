@@ -1,13 +1,9 @@
-// 5、目標管理
-// →フォロワー数いくらかみたいな
-// →目標のタイプも選べるようにしておく(収益、フォロワー数)
-// これは一旦Xのみの機能にする
-const page = () => {
+import KpiBoard from "@/components/KpiBoard";
+
+export default function HomePage() {
   return (
-    <div>
-      Enter
-    </div>
+    <main className="flex min-h-screen items-center justify-center bg-white">
+      <KpiBoard />
+    </main>
   );
 }
-
-export default page;
