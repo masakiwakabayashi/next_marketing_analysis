@@ -1,47 +1,19 @@
 "use client";
-// 1つ1つのタスクに関して未着手、処理中、完了のステータスを変更できるようにする
 
 import React, { useState } from "react";
 
-const goal: string = "売上を前年比120%にする";
-
-const initialKpiData = [
-  {
-    kpi: "新規顧客獲得数を月100件達成",
-    tasks: [
-      { name: "リサーチ資料を集める", status: "未着手" },
-      { name: "競合分析を行う", status: "未着手" },
-      { name: "仮説を立てる", status: "未着手" }
-    ]
-  },
-  {
-    kpi: "リピート率を30%以上に維持",
-    tasks: [
-      { name: "施策案を作成する", status: "未着手" },
-      { name: "関係者とレビューする", status: "未着手" },
-      { name: "フィードバックを反映する", status: "未着手" }
-    ]
-  },
-  {
-    kpi: "平均単価を5万円以上に向上",
-    tasks: [
-      { name: "KPIを設定する", status: "未着手" },
-      { name: "ダッシュボードを作成する", status: "未着手" },
-      { name: "定期的に進捗を確認する", status: "未着手" }
-    ]
-  }
-];
+import kpiData from "../mockResponse/kpiData";
 
 const statusOptions = ["未着手", "処理中", "完了"];
 
 const KpiBoard = () => {
-  const [kpiData, setKpiData] = useState(initialKpiData);
+  const [kpiDataState, setKpiDataState] = useState(kpiData.kpis);
   const [newTaskNames, setNewTaskNames] = useState<string[]>(
-    Array(initialKpiData.length).fill("")
+    Array(kpiData.kpis.length).fill("")
   );
 
   const handleStatusChange = (kpiIdx: number, taskIdx: number, newStatus: string) => {
-    setKpiData(prev =>
+    setKpiDataState(prev =>
       prev.map((kpi, i) =>
         i === kpiIdx
           ? {
@@ -62,7 +34,7 @@ const KpiBoard = () => {
   const handleAddTask = (kpiIdx: number) => {
     const taskName = newTaskNames[kpiIdx].trim();
     if (!taskName) return;
-    setKpiData(prev =>
+    setKpiDataState(prev =>
       prev.map((kpi, i) =>
         i === kpiIdx
           ? {
@@ -81,11 +53,11 @@ const KpiBoard = () => {
         <h1 className="text-2xl font-bold mb-4">KPIボード</h1>
         <div className="mb-6">
           <div className="rounded-full border-2 border-fuchsia-500 px-6 py-3 text-lg font-semibold text-center bg-fuchsia-50 text-fuchsia-700">
-            目標: {goal}
+            目標: {kpiData.goal}
           </div>
         </div>
         <div className="flex flex-row gap-6 justify-center">
-          {kpiData.map((item, kpiIdx) => (
+          {kpiDataState.map((item, kpiIdx) => (
             <div
               key={kpiIdx}
               className="flex-1 min-w-[220px] max-w-xs bg-fuchsia-50 rounded-xl shadow p-4 mb-0"
