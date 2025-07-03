@@ -36,6 +36,9 @@ const statusOptions = ["未着手", "処理中", "完了"];
 
 const KpiBoard = () => {
   const [kpiData, setKpiData] = useState(initialKpiData);
+  const [newTaskNames, setNewTaskNames] = useState<string[]>(
+    Array(initialKpiData.length).fill("")
+  );
 
   const handleStatusChange = (kpiIdx: number, taskIdx: number, newStatus: string) => {
     setKpiData(prev =>
@@ -52,9 +55,29 @@ const KpiBoard = () => {
     );
   };
 
+  const handleTaskNameChange = (kpiIdx: number, value: string) => {
+    setNewTaskNames(prev => prev.map((name, i) => (i === kpiIdx ? value : name)));
+  };
+
+  const handleAddTask = (kpiIdx: number) => {
+    const taskName = newTaskNames[kpiIdx].trim();
+    if (!taskName) return;
+    setKpiData(prev =>
+      prev.map((kpi, i) =>
+        i === kpiIdx
+          ? {
+              ...kpi,
+              tasks: [...kpi.tasks, { name: taskName, status: "未着手" }]
+            }
+          : kpi
+      )
+    );
+    setNewTaskNames(prev => prev.map((name, i) => (i === kpiIdx ? "" : name)));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-6">
+      <div className="w-full bg-white rounded-xl shadow-md p-6">
         <h1 className="text-2xl font-bold mb-4">KPIボード</h1>
         <div className="mb-6">
           <div className="rounded-full border-2 border-fuchsia-500 px-6 py-3 text-lg font-semibold text-center bg-fuchsia-50 text-fuchsia-700">
@@ -69,6 +92,25 @@ const KpiBoard = () => {
             >
               <div className="text-base font-semibold mb-2 text-fuchsia-700 text-center">
                 {kpiIdx + 1}. {item.kpi}
+              </div>
+              <div className="flex my-4 gap-2">
+                <input
+                  type="text"
+                  className="flex-1 px-3 py-2 rounded-md border border-fuchsia-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 text-sm"
+                  placeholder="新しいタスクを追加"
+                  value={newTaskNames[kpiIdx] || ""}
+                  onChange={e => handleTaskNameChange(kpiIdx, e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter") handleAddTask(kpiIdx);
+                  }}
+                />
+                <button
+                  className="px-4 py-2 bg-fuchsia-500 text-white rounded-md hover:bg-fuchsia-600 transition"
+                  onClick={() => handleAddTask(kpiIdx)}
+                  disabled={!newTaskNames[kpiIdx]?.trim()}
+                >
+                  追加
+                </button>
               </div>
               <ul className="space-y-3">
                 {item.tasks.map((task, taskIdx) => (
