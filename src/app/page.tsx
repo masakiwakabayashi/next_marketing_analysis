@@ -8,6 +8,7 @@ export default function Home() {
     { href: "/x/draft/detail/sample-id", label: "Draft Detail" },
     { href: "/x/kpi", label: "KPI" },
     { href: "/x/template", label: "Template" },
+    { href: "/memo", label: "Memo" },
   ];
 
   return (

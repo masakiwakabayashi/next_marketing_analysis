@@ -97,7 +97,7 @@ const KpiBoard = () => {
                           task.status === "完了"
                             ? "bg-green-100 border-green-400"
                             : task.status === "処理中"
-                            ? "bg-yellow-100 border-yellow-400"
+                            ? "bg-sky-100 border-sky-400"
                             : "bg-white border-gray-300"
                         }
                       `}
