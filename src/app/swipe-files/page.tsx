@@ -4,7 +4,8 @@
 
 import React, { useState } from "react";
 
-const TAGS = ["仕事", "プライベート", "重要", "アイデア"];
+// ここには商品のカテゴリーとかが入る感じにするor媒体で分ける
+const TAGS = ["ホワイトニング", "退職代行", "不動産査定", "脱毛"];
 
 const Page = () => {
   const [title, setTitle] = useState("");
@@ -48,57 +49,71 @@ const Page = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "0 auto", padding: 24 }}>
-      <h1>画像保存フォーム</h1>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 16 }}>
-          <label>
-            タイトル:
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-md p-6">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-8">
+            <label className="block font-semibold mb-1" htmlFor="title">
+              タイトル
+            </label>
             <input
+              id="title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              style={{ width: "100%", padding: 8, marginTop: 4 }}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-500 text-gray-800"
               required
+              placeholder="タイトルを入力"
             />
-          </label>
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <div>タグ（複数選択可）:</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
-            {TAGS.map((tag) => (
-              <label key={tag} style={{ display: "flex", alignItems: "center" }}>
-                <input
-                  type="checkbox"
-                  checked={selectedTags.includes(tag)}
-                  onChange={() => handleTagChange(tag)}
-                  style={{ marginRight: 4 }}
-                />
-                {tag}
-              </label>
-            ))}
           </div>
-        </div>
-        <div style={{ marginBottom: 16 }}>
-          <label>
-            画像:
+          <div className="mb-8">
+            <div className="font-semibold mb-1">タグ</div>
+            <div className="flex flex-wrap gap-2">
+              {TAGS.map((tag) => (
+                <label
+                  key={tag}
+                  className="flex items-center bg-gray-100 rounded-full px-3 py-1 cursor-pointer hover:bg-fuchsia-50 transition"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedTags.includes(tag)}
+                    onChange={() => handleTagChange(tag)}
+                    className="mr-2 accent-fuchsia-500"
+                  />
+                  <span className="text-sm">{tag}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="mb-8">
+            <label className="block font-semibold mb-1" htmlFor="image">
+              画像
+            </label>
             <input
+              id="image"
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              style={{ display: "block", marginTop: 4 }}
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-fuchsia-50 file:text-fuchsia-700 hover:file:bg-fuchsia-100"
             />
-          </label>
-          {previewUrl && (
-            <div style={{ marginTop: 8 }}>
-              <img src={previewUrl} alt="プレビュー" style={{ maxWidth: "100%" }} />
-            </div>
-          )}
-        </div>
-        <button type="submit" style={{ padding: "8px 24px" }}>
-          保存
-        </button>
-      </form>
+            {previewUrl && (
+              <div className="mt-3 flex justify-center">
+                <img
+                  src={previewUrl}
+                  alt="プレビュー"
+                  className="max-w-full max-h-48 rounded-lg border border-gray-200 shadow"
+                />
+              </div>
+            )}
+          </div>
+          <button
+            type="submit"
+            className="w-full py-2 rounded-md font-semibold bg-fuchsia-500 text-white hover:bg-fuchsia-600 transition"
+          >
+            保存
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
