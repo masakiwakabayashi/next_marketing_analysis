@@ -14,56 +14,19 @@ type Day = {
   checks: Record<string, boolean>;
 };
 
-const days: Day[] = [
-  {
-    date: 1,
-    checks: { diary: true, jogging: true, sleep: true, meditation: true },
-  },
-  {
-    date: 2,
-    checks: { diary: true, jogging: true, sleep: true, meditation: false },
-  },
-  {
-    date: 3,
-    checks: { diary: true, jogging: true, sleep: false, meditation: false },
-  },
-  {
-    date: 4,
-    checks: { diary: false, jogging: false, sleep: true, meditation: false },
-  },
-  {
-    date: 5,
-    checks: { diary: false, jogging: true, sleep: true, meditation: true },
-  },
-  {
-    date: 6,
-    checks: { diary: true, jogging: false, sleep: true, meditation: true },
-  },
-  {
-    date: 7,
-    checks: { diary: true, jogging: true, sleep: true, meditation: true },
-  },
-  {
-    date: 8,
-    checks: { diary: false, jogging: false, sleep: true, meditation: false },
-  },
-  {
-    date: 9,
-    checks: { diary: true, jogging: true, sleep: true, meditation: true },
-  },
-  {
-    date: 10,
-    checks: { diary: true, jogging: true, sleep: true, meditation: true },
-  },
-  {
-    date: 11,
-    checks: { diary: false, jogging: false, sleep: true, meditation: false },
-  },
-  {
-    date: 12,
-    checks: { diary: true, jogging: true, sleep: true, meditation: true },
-  },
-];
+const days: Day[] = Array.from({ length: 30 }, (_, i) => {
+  // パターン例: 日付ごとにチェック状態を変化させる
+  const date = i + 1;
+  return {
+    date,
+    checks: {
+      diary: date % 2 === 1, // 奇数日: 日記チェック
+      jogging: date % 3 !== 0, // 3の倍数以外: ジョギングチェック
+      sleep: date % 4 < 2, // 2日ごとにON/OFF
+      meditation: date % 5 === 0 || date % 2 === 0, // 5の倍数または偶数日
+    },
+  };
+});
 
 export default function HabitTrackerPage() {
   return (
