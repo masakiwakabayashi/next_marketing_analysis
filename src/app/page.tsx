@@ -6,7 +6,7 @@ export default function Home() {
     { href: "/x/analysis", label: "Analysis" },
     { href: "/x/draft", label: "Draft" },
     { href: "/x/draft/detail/sample-id", label: "Draft Detail" },
-    { href: "/x/kpi", label: "KPI" },
+    { href: "/kpi", label: "KPI" },
     { href: "/x/template", label: "Template" },
     { href: "/memo", label: "Memo" },
     { href: "/swipe-files", label: "Swipe Files" },
