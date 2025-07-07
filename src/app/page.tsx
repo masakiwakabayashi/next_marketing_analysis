@@ -9,6 +9,7 @@ export default function Home() {
     { href: "/kpi", label: "KPI" },
     { href: "/x/template", label: "Template" },
     { href: "/memo", label: "Memo" },
+    { href: "/habit-tracker", label: "Habit Tracker" },
     { href: "/swipe-files", label: "Swipe Files" },
   ];
 
