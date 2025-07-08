@@ -1,12 +1,6 @@
 "use client";
 import React from "react";
-
-const habits = [
-  { label: "📝日記", key: "diary" },
-  { label: "🏃‍♂️ジョギング", key: "jogging" },
-  { label: "💤8時間睡眠", key: "sleep" },
-  { label: "🧘‍♂️瞑想", key: "meditation" },
-];
+import { habits } from "@/mockResponse/habits";
 
 // サンプルデータ（1日〜9日分）
 type Day = {
@@ -31,7 +25,7 @@ const days: Day[] = Array.from({ length: 30 }, (_, i) => {
 export default function HabitTrackerPage() {
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">習慣トラッカー：1月</h1>
+      <h1 className="text-2xl font-bold mb-6">習慣トラッカー: 7月</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {days.map((day) => (
           <div
