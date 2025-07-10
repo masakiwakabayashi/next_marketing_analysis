@@ -15,7 +15,7 @@ const RoadmapPage = () => {
                 {idx + 1}
               </span>
               <div className="flex flex-col">
-                <span className="text-sm text-gray-400 font-medium mb-0.5">{step.period}</span>
+                <span className="text-sm font-medium mb-0.5">{step.period}</span>
                 <div className="font-semibold text-lg text-gray-900">{step.title}</div>
                 <div className="text-gray-500 mt-1 text-base">{step.description}</div>
               </div>

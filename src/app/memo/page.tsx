@@ -74,6 +74,41 @@ const MemoPage = () => {
           </ul>
         )}
       </div>
+      <div className="w-full max-w-md mt-8">
+        <ApiTest />
+      </div>
+    </div>
+  );
+}
+
+ // APIテスト用コンポーネント
+import { useTransition } from "react";
+import { testApi } from "./actions";
+
+function ApiTest() {
+  const [result, setResult] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const handleTest = () => {
+    setResult(null);
+    startTransition(async () => {
+      const res = await testApi();
+      setResult(res);
+    });
+  };
+
+  return (
+    <div className="border border-gray-200 rounded-lg p-6 bg-white shadow-sm">
+      <button
+        onClick={handleTest}
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        disabled={isPending}
+      >
+        {isPending ? "通信中..." : "APIテスト"}
+      </button>
+      <div className="mt-4 text-sm text-gray-700 break-all">
+        {result && <pre>{result}</pre>}
+      </div>
     </div>
   );
 }
