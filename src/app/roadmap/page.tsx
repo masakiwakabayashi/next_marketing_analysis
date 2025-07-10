@@ -1,22 +1,5 @@
 import React from "react";
-
-const roadmapSteps = [
-  {
-    period: "2025年7月",
-    title: "企画",
-    description: "目標設定や要件定義を行います。",
-  },
-  {
-    period: "2025年8月",
-    title: "開発",
-    description: "設計・実装・テストを進めます。",
-  },
-  {
-    period: "2025年9月",
-    title: "リリース",
-    description: "本番環境へ公開し、運用を開始します。",
-  },
-];
+import { roadmapSteps } from "../../mockResponse/roadmapSteps";
 
 const RoadmapPage = () => {
   return (

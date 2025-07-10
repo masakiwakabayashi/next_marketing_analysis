@@ -45,5 +45,6 @@ next-env.d.ts
 # レスポンスのモックデータ
 src/mockResponse/kpiData.ts
 src/mockResponse/habits.ts
+src/mockResponse/roadmapSteps.ts
 
 todo.txt
