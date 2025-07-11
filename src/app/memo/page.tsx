@@ -83,7 +83,7 @@ const MemoPage = () => {
 
  // APIテスト用コンポーネント
 import { useTransition } from "react";
-import { testApi } from "./actions";
+import { testApi } from "../../features/memo/actions";
 
 function ApiTest() {
   const [result, setResult] = useState<string | null>(null);
