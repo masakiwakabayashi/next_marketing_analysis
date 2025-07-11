@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ApiTest from "@/components/ApiTest";
 
 export default function Home() {
   // x関連のページへのリンクリスト
@@ -32,6 +33,9 @@ export default function Home() {
           </li>
         ))}
       </ul>
+      <div className="w-full max-w-md mt-8">
+        <ApiTest />
+      </div>
     </div>
   );
 }
