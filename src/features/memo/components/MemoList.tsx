@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 type Memo = {
   id: number;
@@ -17,6 +18,7 @@ const initialMemos: Memo[] = [
 
 const MemoList: React.FC = () => {
   const [memos, setMemos] = useState<Memo[]>(initialMemos);
+  const { user } = useAuth();
 
 
   return (
