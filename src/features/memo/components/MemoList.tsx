@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { useState } from "react";
 
 type Memo = {
   id: number;
@@ -7,11 +9,16 @@ type Memo = {
   createdAt: string;
 };
 
-type MemoListProps = {
-  memos: Memo[];
-};
+const initialMemos: Memo[] = [
+  { id: 1, text: "これは最初のメモです", createdAt: "2025-07-03 21:00" },
+  { id: 2, text: "2つ目のメモサンプル", createdAt: "2025-07-03 21:05" },
+];
 
-const MemoList: React.FC<MemoListProps> = ({ memos }) => {
+
+const MemoList: React.FC = () => {
+  const [memos, setMemos] = useState<Memo[]>(initialMemos);
+
+
   return (
     <div className="w-full max-w-md mt-8">
       <h2 className="text-xl font-bold mb-4">メモ一覧</h2>
