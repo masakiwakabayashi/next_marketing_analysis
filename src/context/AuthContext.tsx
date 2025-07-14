@@ -2,12 +2,14 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 
 type User = {
+  id: number;
   name: string;
   email: string;
 };
 
 // ログイン機能を作成するまではハードコーディングされたデータを使う
 const hardcodedUser: User = {
+  id: 1,
   name: 'Alice',
   email: 'alice@example.com',
 };

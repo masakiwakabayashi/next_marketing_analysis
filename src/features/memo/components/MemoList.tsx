@@ -20,6 +20,26 @@ const MemoList: React.FC = () => {
   const [memos, setMemos] = useState<Memo[]>(initialMemos);
   const { user } = useAuth();
 
+  // ↓ データが取得できるように修正する
+  // ユーザーIDに紐づくメモデータを取得する関数
+  const fetchMemos = async (userId: string | number) => {
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      if (!baseUrl) throw new Error("APIのベースURLが設定されていません");
+      const res = await fetch(`${baseUrl}/${userId}/memos`);
+      if (!res.ok) throw new Error("メモの取得に失敗しました");
+      const data = await res.json();
+      setMemos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (user?.id) {
+      fetchMemos(user.id);
+    }
+  }, [user?.id]);
 
   return (
     <div className="w-full max-w-md mt-8">
