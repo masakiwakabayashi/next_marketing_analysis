@@ -4,11 +4,8 @@ import ApiTest from "@/components/ApiTest";
 export default function Home() {
   // x関連のページへのリンクリスト
   const links = [
-    { href: "/x/analysis", label: "Analysis" },
-    { href: "/x/draft", label: "Draft" },
-    { href: "/x/draft/detail/sample-id", label: "Draft Detail" },
     { href: "/kpi", label: "KPI" },
-    { href: "/x/template", label: "Template" },
+    { href: "/dashboard", label: "Dashboard" },
     { href: "/memo", label: "Memo" },
     { href: "/roadmap", label: "Roadmap" },
     { href: "/habit-tracker", label: "Habit Tracker" },
@@ -17,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">X関連</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">ページ一覧</h2>
       <ul className="w-full max-w-md space-y-4">
         {links.map((link) => (
           <li
