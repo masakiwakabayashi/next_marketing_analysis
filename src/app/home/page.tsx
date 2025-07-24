@@ -81,6 +81,13 @@ export default function Page() {
           </div>
         </div>
       </div>
+
+      {/*  */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+        <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 1</div>
+        <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 2</div>
+        <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 3</div>
+      </div>
     </div>
   );
 }
