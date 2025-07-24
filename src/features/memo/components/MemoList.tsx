@@ -21,6 +21,7 @@ const MemoList: React.FC = () => {
   const { user } = useAuth();
 
   // ↓ データが取得できるように修正する
+  // どうやら認証関連のエラーっぽい
   // ユーザーIDに紐づくメモデータを取得する関数
   const fetchMemos = async (userId: string | number) => {
     try {
@@ -29,7 +30,8 @@ const MemoList: React.FC = () => {
       const res = await fetch(`${baseUrl}/${userId}/memos`);
       if (!res.ok) throw new Error("メモの取得に失敗しました");
       const data = await res.json();
-      setMemos(data);
+      console.log(data);
+      // setMemos(data);
     } catch (error) {
       console.error(error);
     }
