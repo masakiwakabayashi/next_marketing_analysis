@@ -2,51 +2,54 @@
 import React from "react";
 import { habits } from "@/mockResponse/habits";
 
-// サンプルデータ（1日〜9日分）
+// サンプルデータ（1日〜30日分）
 type Day = {
   date: number;
   checks: Record<string, boolean>;
 };
 
 const days: Day[] = Array.from({ length: 30 }, (_, i) => {
-  // パターン例: 日付ごとにチェック状態を変化させる
   const date = i + 1;
   return {
     date,
     checks: {
-      diary: date % 2 === 1, // 奇数日: 日記チェック
-      jogging: date % 3 !== 0, // 3の倍数以外: ジョギングチェック
-      sleep: date % 4 < 2, // 2日ごとにON/OFF
-      meditation: date % 5 === 0 || date % 2 === 0, // 5の倍数または偶数日
+      diary: date % 2 === 1,
+      jogging: date % 3 !== 0,
+      sleep: date % 4 < 2,
+      meditation: date % 5 === 0 || date % 2 === 0,
     },
   };
 });
 
 export default function HabitTrackerPage() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">習慣トラッカー: 7月</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <div className="min-h-screen bg-blue-50 p-8">
+      <h1 className="text-3xl font-bold mb-8 text-blue-900 tracking-tight">
+        習慣トラッカー: 7月
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {days.map((day) => (
           <div
             key={day.date}
-            className="bg-white rounded-xl shadow border p-4 flex flex-col min-h-[180px] relative"
+            className="bg-white rounded-xl p-6 shadow text-center border border-blue-100 flex flex-col min-h-[220px] relative"
           >
-            <div className="font-bold mb-2">{day.date}日</div>
-            <ul className="flex-1 space-y-1 mb-4">
+            <div className="font-semibold text-blue-700 mb-4 text-lg">
+              {day.date}日
+            </div>
+            <ul className="flex-1 flex flex-col gap-2 mb-6">
               {habits.map((habit) => (
-                <li key={habit.key} className="flex items-center gap-2">
+                <li key={habit.key} className="flex items-center gap-2 justify-start">
                   <input
                     type="checkbox"
                     checked={day.checks[habit.key]}
                     readOnly
-                    className="accent-blue-500 w-4 h-4"
+                    className="accent-blue-400 w-5 h-5 rounded border-blue-300"
                   />
                   <span
                     className={
                       day.checks[habit.key]
-                        ? ""
-                        : "text-gray-400 line-through"
+                        ? "text-blue-900 font-medium"
+                        : "text-blue-400 line-through"
                     }
                   >
                     {habit.label}
@@ -54,8 +57,7 @@ export default function HabitTrackerPage() {
                 </li>
               ))}
             </ul>
-            {/* 下部の進捗インジケータ */}
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               <ProgressCircle
                 value={
                   (Object.values(day.checks).filter(Boolean).length /
@@ -64,15 +66,14 @@ export default function HabitTrackerPage() {
                 }
               />
             </div>
-            {/* 4日目の右上メニューアイコン（例示） */}
             {day.date === 4 && (
               <div className="absolute top-3 right-3">
                 <button
-                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-blue-100 transition"
                   tabIndex={-1}
                   aria-label="more"
                 >
-                  <svg width="20" height="20" fill="currentColor">
+                  <svg width="20" height="20" fill="currentColor" className="text-blue-400">
                     <circle cx="4" cy="10" r="1.5" />
                     <circle cx="10" cy="10" r="1.5" />
                     <circle cx="16" cy="10" r="1.5" />
@@ -87,10 +88,10 @@ export default function HabitTrackerPage() {
   );
 }
 
-// シンプルな円形プログレス
+// 円形プログレスバー（青系カラー）
 function ProgressCircle({ value }: { value: number }) {
-  const radius = 14;
-  const stroke = 3;
+  const radius = 18;
+  const stroke = 4;
   const normalizedRadius = radius - stroke / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const progress = (value / 100) * circumference;
@@ -103,7 +104,7 @@ function ProgressCircle({ value }: { value: number }) {
       style={{ minWidth: radius * 2, minHeight: radius * 2 }}
     >
       <circle
-        stroke="#e5e7eb"
+        stroke="#dbeafe"
         fill="transparent"
         strokeWidth={stroke}
         r={normalizedRadius}
@@ -111,7 +112,7 @@ function ProgressCircle({ value }: { value: number }) {
         cy={radius}
       />
       <circle
-        stroke="#3b82f6"
+        stroke="#60a5fa"
         fill="transparent"
         strokeWidth={stroke}
         strokeLinecap="round"
@@ -120,6 +121,7 @@ function ProgressCircle({ value }: { value: number }) {
         r={normalizedRadius}
         cx={radius}
         cy={radius}
+        className="transition-all duration-300"
       />
     </svg>
   );
