@@ -18,17 +18,17 @@ export default function Home() {
       </h2>
       <ul className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
         {links.map((link) => (
-          <li
+          <Link
             key={link.href}
-            className="bg-white rounded-xl p-6 shadow text-center border border-blue-100 transition hover:shadow-md"
+            href={link.href}
+            className="text-lg font-semibold text-blue-900 hover:text-blue-700 transition-colors"
           >
-            <Link
-              href={link.href}
-              className="text-lg font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+            <li
+              className="bg-white rounded-xl p-6 shadow text-center border border-blue-100 transition hover:shadow-md"
             >
               {link.label}
-            </Link>
-          </li>
+            </li>
+          </Link>
         ))}
       </ul>
       <div className="w-full max-w-2xl">
