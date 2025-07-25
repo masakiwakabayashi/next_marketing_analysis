@@ -1,0 +1,76 @@
+## components
+### base
+- framework: Next.js
+- styling: TailwindCSS
+- font:
+  - family: sans
+  - weight: 400, 600, 700
+- layout:
+  - spacing:
+    - padding: p-6 ~ p-8
+    - margin-bottom: mb-4 ~ mb-10
+  - grid:
+    - gap: gap-8
+    - columns:
+      - mobile: grid-cols-1
+      - desktop: md:grid-cols-3
+- border:
+  - radius: rounded-xl
+  - style: border border-blue-100
+- shadow:
+  - default: shadow
+
+### colors
+- background:
+  - screen: bg-blue-50
+  - card: bg-white
+  - accent: bg-blue-100
+- text:
+  - primary: text-blue-900
+  - secondary: text-blue-700
+  - subtle: text-blue-400
+  - table-header: text-blue-600
+- border:
+  - primary: border-blue-100
+  - bar: border-blue-300
+- chart:
+  - bar: bg-blue-400/80
+- table:
+  - header: bg-blue-100
+  - stripe: bg-fuchsia-50
+
+### components-specific
+#### header
+- classes: text-3xl font-bold mb-8 text-blue-900 tracking-tight
+
+#### kpi-card
+- container: bg-white rounded-xl p-6 shadow text-center border border-blue-100
+- label: text-base text-blue-400 mb-2
+- value: text-2xl font-semibold text-blue-900 bg-blue-100 rounded py-2
+
+#### chart
+- container: bg-white rounded-xl p-6 shadow border border-blue-100 min-h-[220px] flex flex-col
+- title: text-lg font-semibold mb-4 text-blue-700
+- bar: w-6 rounded transition-all bg-blue-400/80 border border-blue-300
+- x-axis: flex justify-between text-xs text-blue-400
+
+#### table
+- container: bg-white rounded-xl p-6 shadow border border-blue-100 min-h-[220px]
+- header-row: bg-blue-100
+- header-cell: text-left px-2 py-1 text-blue-600
+- cell: px-2 py-1
+- cell-right: text-right px-2 py-1
+- stripe: bg-fuchsia-50
+
+#### info-box
+- classes: bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow
+
+## rules
+1. 全てのUIは柔らかい印象を持たせるため `rounded-xl` をデフォルトに使用する
+2. カードやセクションは `bg-white + border-blue-100 + shadow` を基本にする
+3. 背景は淡いブルー系 (`bg-blue-50`) を使用し、落ち着いた印象にする
+4. 主要テキストは `text-blue-900`、サブテキストは `text-blue-400` / `text-blue-700` を使用する
+5. テーブルのヘッダーは `bg-blue-100`、偶数行に `bg-fuchsia-50` を使用してストライプを表現する
+6. グリッドは `grid-cols-1` + `md:grid-cols-3` を基準にレスポンシブ設計
+7. 全体的にパディングは `p-6 ~ p-8`、セクション間の間隔は `mb-8 ~ mb-10` を基準にする
+

@@ -4,8 +4,10 @@ import ApiTest from "@/components/ApiTest";
 export default function Home() {
   // x関連のページへのリンクリスト
   const links = [
+    // メインの分析機能
     { href: "/kpi", label: "KPI" },
     { href: "/dashboard", label: "Dashboard" },
+    // 広告とは直接関係ない機能
     { href: "/memo", label: "Memo" },
     { href: "/roadmap", label: "Roadmap" },
     { href: "/habit-tracker", label: "Habit Tracker" },
