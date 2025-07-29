@@ -6,7 +6,7 @@ type Habit = {
 };
 
 type HabitDayCardProps = {
-  date: number;
+  date: number | string;
   checks: Record<string, boolean>;
   habits: Habit[];
   showDate?: boolean;
@@ -17,7 +17,6 @@ export function HabitDayCard({
   date,
   checks,
   habits,
-  showDate = true,
   className = "",
 }: HabitDayCardProps) {
   const progress =
@@ -30,11 +29,18 @@ export function HabitDayCard({
         className
       }
     >
-      {showDate && (
-        <div className="font-semibold text-blue-700 mb-4 text-lg">
-          {date}日
-        </div>
-      )}
+      <div className="font-semibold text-blue-700 mb-4 text-lg">
+        {(() => {
+          const dateStr = date.toString();
+          if (dateStr.length === 8) {
+            const year = dateStr.slice(0, 4);
+            const month = parseInt(dateStr.slice(4, 6), 10);
+            const day = parseInt(dateStr.slice(6, 8), 10);
+            return `${year}年${month}月${day}日`;
+          }
+          return date;
+        })()}
+      </div>
       <ul className="flex-1 flex flex-col gap-2 mb-6">
         {habits.map((habit) => (
           <li key={habit.key} className="flex items-center gap-2 justify-start">

@@ -20,16 +20,19 @@ const dummyTable = [
 ];
 
 const today = (() => {
-  // サンプル: 今日の日付（1〜30の範囲でランダム or 固定値）
+  // サンプル: 今日の日付を「YYYYMMDD」形式の8桁数値で生成
   const now = new Date();
-  const date = Math.min(now.getDate(), 30);
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const yyyymmdd = Number(`${year}${month}${day}`);
   return {
-    date,
+    date: yyyymmdd,
     checks: {
-      diary: date % 2 === 1,
-      jogging: date % 3 !== 0,
-      sleep: date % 4 < 2,
-      meditation: date % 5 === 0 || date % 2 === 0,
+      diary: now.getDate() % 2 === 1,
+      jogging: now.getDate() % 3 !== 0,
+      sleep: now.getDate() % 4 < 2,
+      meditation: now.getDate() % 5 === 0 || now.getDate() % 2 === 0,
     },
   };
 })();
@@ -108,7 +111,6 @@ export default function Page() {
             date={today.date}
             checks={today.checks}
             habits={habits}
-            showDate={false}
           />
         </div>
         <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 2</div>
