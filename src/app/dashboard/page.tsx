@@ -43,6 +43,13 @@ export default function Page() {
   return (
     <div className="p-8 font-sans min-h-screen bg-blue-50">
       <h1 className="text-3xl font-bold mb-8 text-blue-900 tracking-tight">広告分析ダッシュボード</h1>
+
+      <div className="mb-10">
+        <div className="bg-white text-xl rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow p-4">
+          目標: <span className="ml-2"></span>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
         {kpiData.map((kpi) => (
           <div
