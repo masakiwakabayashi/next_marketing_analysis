@@ -6,6 +6,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchUser = async () => {
+      // src/app/api/post/route.ts
       const res = await fetch('/api/post?username=jack');
       const json = await res.json();
       setUser(json);

@@ -1,3 +1,7 @@
+"use client";
+import { habits } from "@/mockResponse/habits";
+import { HabitDayCard } from "@/components/HabitDayCard";
+
 // 広告分析ダッシュボード サンプル（青系デザイン＋fuchsiaアクセント）
 
 const kpiData = [
@@ -14,6 +18,21 @@ const dummyTable = [
   { campaign: "キャンペーンB", imp: 40000, click: 3000, cost: "¥100,000", cv: 120 },
   { campaign: "キャンペーンC", imp: 30000, click: 2000, cost: "¥80,000", cv: 80 },
 ];
+
+const today = (() => {
+  // サンプル: 今日の日付（1〜30の範囲でランダム or 固定値）
+  const now = new Date();
+  const date = Math.min(now.getDate(), 30);
+  return {
+    date,
+    checks: {
+      diary: date % 2 === 1,
+      jogging: date % 3 !== 0,
+      sleep: date % 4 < 2,
+      meditation: date % 5 === 0 || date % 2 === 0,
+    },
+  };
+})();
 
 export default function Page() {
   return (
@@ -84,7 +103,14 @@ export default function Page() {
 
       {/*  */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-        <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 1</div>
+        <div>
+          <HabitDayCard
+            date={today.date}
+            checks={today.checks}
+            habits={habits}
+            showDate={false}
+          />
+        </div>
         <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 2</div>
         <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 3</div>
       </div>
