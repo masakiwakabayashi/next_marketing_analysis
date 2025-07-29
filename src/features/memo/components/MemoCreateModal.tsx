@@ -13,10 +13,10 @@ const MemoCreateModal: React.FC = () => {
   const disabled = text.length > MAX_LENGTH;
 
   return (
-    <div className="w-full max-w-md bg-white rounded-xl shadow-md p-6">
+    <div className="w-full max-w-md bg-white rounded-xl shadow-md p-6 border border-blue-100">
       <h1 className="text-2xl font-bold mb-4">メモを作成する</h1>
       <textarea
-        className="w-full h-32 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-500 resize-none text-gray-800"
+        className="w-full h-32 p-3 border border-blue-100 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-500 resize-none text-gray-800"
         maxLength={MAX_LENGTH}
         value={text}
         onChange={(e) => setText(e.target.value)}

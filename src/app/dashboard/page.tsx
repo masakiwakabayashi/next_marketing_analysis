@@ -37,6 +37,8 @@ const today = (() => {
   };
 })();
 
+import MemoCreateModal from "@/features/memo/components/MemoCreateModal";
+
 export default function Page() {
   return (
     <div className="p-8 font-sans min-h-screen bg-blue-50">
@@ -113,7 +115,9 @@ export default function Page() {
             habits={habits}
           />
         </div>
-        <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 2</div>
+        <div>
+          <MemoCreateModal />
+        </div>
         <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 3</div>
       </div>
     </div>
