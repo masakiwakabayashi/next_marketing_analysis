@@ -1,124 +1,64 @@
-"use client";
+import React from "react";
 
-import React, { useState } from "react";
-import kpiData from "../mockResponse/kpiData";
+/**
+ * TikTok運用KPI管理ボード
+ * サンプル数値をハードコーディング
+ * .clinerulesのデザインガイドに準拠
+ */
 
-const statusOptions = ["未着手", "処理中", "完了"];
+const kpis = [
+  {
+    label: "フォロワー数",
+    value: "12,340",
+    unit: "人",
+  },
+  {
+    label: "月間再生数",
+    value: "456,789",
+    unit: "回",
+  },
+  {
+    label: "月間いいね数",
+    value: "8,765",
+    unit: "件",
+  },
+  {
+    label: "月間コメント数",
+    value: "432",
+    unit: "件",
+  },
+  {
+    label: "月間シェア数",
+    value: "210",
+    unit: "件",
+  },
+  {
+    label: "エンゲージメント率",
+    value: "5.4",
+    unit: "%",
+  },
+];
 
-const KpiBoard = () => {
-  const [kpiDataState, setKpiDataState] = useState(kpiData.kpis);
-  const [newTaskNames, setNewTaskNames] = useState<string[]>(
-    Array(kpiData.kpis.length).fill("")
-  );
-
-  const handleStatusChange = (kpiIdx: number, taskIdx: number, newStatus: string) => {
-    setKpiDataState(prev =>
-      prev.map((kpi, i) =>
-        i === kpiIdx
-          ? {
-              ...kpi,
-              tasks: kpi.tasks.map((task, j) =>
-                j === taskIdx ? { ...task, status: newStatus } : task
-              )
-            }
-          : kpi
-      )
-    );
-  };
-
-  const handleTaskNameChange = (kpiIdx: number, value: string) => {
-    setNewTaskNames(prev => prev.map((name, i) => (i === kpiIdx ? value : name)));
-  };
-
-  const handleAddTask = (kpiIdx: number) => {
-    const taskName = newTaskNames[kpiIdx].trim();
-    if (!taskName) return;
-    setKpiDataState(prev =>
-      prev.map((kpi, i) =>
-        i === kpiIdx
-          ? {
-              ...kpi,
-              tasks: [...kpi.tasks, { name: taskName, status: "未着手" }]
-            }
-          : kpi
-      )
-    );
-    setNewTaskNames(prev => prev.map((name, i) => (i === kpiIdx ? "" : name)));
-  };
-
+export default function KpiBoard() {
   return (
-    <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4 py-8">
-      <div className="w-full max-w-6xl bg-white rounded-xl shadow p-8 border border-blue-100">
-        <h1 className="text-3xl font-bold mb-8 text-blue-900 tracking-tight">目標管理ボード</h1>
-        <div className="mb-10">
-          <div className="bg-blue-100 text-xl rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow p-4">
-            目標: <span className="ml-2">{kpiData.goal}</span>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {kpiDataState.map((item, kpiIdx) => (
-            <div
-              key={kpiIdx}
-              className="bg-white rounded-xl p-6 shadow text-center border border-blue-100 flex flex-col"
-            >
-              <div className="text-base text-blue-700 font-bold mb-2">{kpiIdx + 1}. {item.kpi}</div>
-              <div className="flex my-4 gap-2">
-                <input
-                  type="text"
-                  className="flex-1 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
-                  placeholder="新しいタスクを追加"
-                  value={newTaskNames[kpiIdx] || ""}
-                  onChange={e => handleTaskNameChange(kpiIdx, e.target.value)}
-                  onKeyDown={e => {
-                    if (e.key === "Enter") handleAddTask(kpiIdx);
-                  }}
-                />
-                <button
-                  className="px-4 py-2 bg-blue-400 text-white rounded-md hover:bg-blue-500 transition font-semibold"
-                  onClick={() => handleAddTask(kpiIdx)}
-                  disabled={!newTaskNames[kpiIdx]?.trim()}
-                >
-                  追加
-                </button>
-              </div>
-              <ul className="space-y-3 text-left">
-                {item.tasks.map((task, taskIdx) => (
-                  <li
-                    key={taskIdx}
-                    className={`flex items-center justify-between rounded-lg border border-blue-100 shadow p-3 transition
-                      ${taskIdx % 2 === 1 ? "bg-fuchsia-50" : "bg-white"}
-                      hover:bg-blue-100
-                    `}
-                  >
-                    <span className="text-blue-900">{task.name}</span>
-                    <select
-                      className={`ml-2 px-3 py-1 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm
-                        ${
-                          task.status === "完了"
-                            ? "bg-green-100 border-green-400"
-                            : task.status === "処理中"
-                            ? "bg-blue-100 border-blue-400"
-                            : "bg-white border-blue-300"
-                        }
-                      `}
-                      value={task.status}
-                      onChange={e => handleStatusChange(kpiIdx, taskIdx, e.target.value)}
-                    >
-                      {statusOptions.map(opt => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </li>
-                ))}
-              </ul>
+    <section className="bg-white rounded-xl p-8 shadow border border-blue-100 mb-10">
+      <h2 className="text-3xl font-bold mb-8 text-blue-900 tracking-tight">
+        TikTok運用KPIボード
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {kpis.map((kpi) => (
+          <div
+            key={kpi.label}
+            className="bg-white rounded-xl p-6 shadow text-center border border-blue-100 flex flex-col items-center"
+          >
+            <div className="text-base text-blue-400 mb-2">{kpi.label}</div>
+            <div className="text-2xl font-semibold text-blue-900 bg-blue-100 rounded py-2 px-4 flex items-baseline justify-center">
+              {kpi.value}
+              <span className="text-base text-blue-400 ml-2">{kpi.unit}</span>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
-};
-
-export default KpiBoard;
+}
