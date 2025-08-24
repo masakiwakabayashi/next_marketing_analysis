@@ -1,6 +1,8 @@
 "use client";
 import { habits } from "@/mockResponse/habits";
 import { HabitDayCard } from "@/components/HabitDayCard";
+import MemoCreateModal from "@/features/memo/components/MemoCreateModal";
+import FileUpload from "@/components/FileUpload";
 
 // 広告分析ダッシュボード サンプル（青系デザイン＋fuchsiaアクセント）
 
@@ -36,8 +38,6 @@ const today = (() => {
     },
   };
 })();
-
-import MemoCreateModal from "@/features/memo/components/MemoCreateModal";
 
 export default function Page() {
   return (
@@ -113,7 +113,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/*  */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
         <div>
           <HabitDayCard
@@ -125,7 +124,9 @@ export default function Page() {
         <div>
           <MemoCreateModal />
         </div>
-        <div className="bg-blue-100 rounded-xl flex items-center justify-center h-18 text-blue-700 font-semibold shadow">Box 3</div>
+        <div>
+          <FileUpload />
+        </div>
       </div>
     </div>
   );
