@@ -53,6 +53,42 @@ const kpiData: Record<Period, Kpi[]> = {
 
 const periods: Period[] = ["1日", "1週間", "1ヶ月", "3ヶ月"];
 
+type Video = {
+  title: string;
+  url: string;
+  views: number;
+  likes: number;
+  bookmarks: number;
+  postedAt: string;
+};
+
+const videoData: Video[] = [
+  {
+    title: "TikTokアルゴリズム解説",
+    url: "https://www.tiktok.com/@sample1",
+    views: 1200,
+    likes: 80,
+    bookmarks: 10,
+    postedAt: "2025-08-20",
+  },
+  {
+    title: "バズる動画の作り方",
+    url: "https://www.tiktok.com/@sample2",
+    views: 3400,
+    likes: 210,
+    bookmarks: 35,
+    postedAt: "2025-08-18",
+  },
+  {
+    title: "ショート動画編集テクニック",
+    url: "https://www.tiktok.com/@sample3",
+    views: 900,
+    likes: 60,
+    bookmarks: 8,
+    postedAt: "2025-08-15",
+  },
+];
+
 export default function KpiBoard() {
   const [selectedPeriod, setSelectedPeriod] = useState<Period>("1ヶ月");
 
@@ -91,6 +127,38 @@ export default function KpiBoard() {
             </div>
           </div>
         ))}
+      </div>
+      {/* ここに個別の投稿の再生数などを表示するようにしたい */}
+      <div className="bg-white rounded-xl p-6 shadow border border-blue-100 min-h-[220px] mt-10">
+        <h3 className="text-lg font-semibold mb-4 text-blue-700">動画別パフォーマンス</h3>
+        <table className="w-full">
+          <thead>
+            <tr className="bg-blue-100">
+              <th className="text-left px-2 py-1 text-blue-600">タイトル</th>
+              <th className="text-left px-2 py-1 text-blue-600">URL</th>
+              <th className="text-right px-2 py-1 text-blue-600">再生回数</th>
+              <th className="text-right px-2 py-1 text-blue-600">いいね</th>
+              <th className="text-right px-2 py-1 text-blue-600">ブックマーク</th>
+              <th className="text-left px-2 py-1 text-blue-600">投稿日時</th>
+            </tr>
+          </thead>
+          <tbody>
+            {videoData.map((video, idx) => (
+              <tr key={video.url} className={idx % 2 === 1 ? "bg-fuchsia-50" : ""}>
+                <td className="px-2 py-1 text-blue-900">{video.title}</td>
+                <td className="px-2 py-1">
+                  <a href={video.url} className="text-blue-400 underline" target="_blank" rel="noopener noreferrer">
+                    {video.url}
+                  </a>
+                </td>
+                <td className="text-right px-2 py-1 text-blue-900">{video.views.toLocaleString()}</td>
+                <td className="text-right px-2 py-1 text-blue-900">{video.likes.toLocaleString()}</td>
+                <td className="text-right px-2 py-1 text-blue-900">{video.bookmarks.toLocaleString()}</td>
+                <td className="px-2 py-1 text-blue-700">{video.postedAt}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
